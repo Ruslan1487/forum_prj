@@ -5,6 +5,8 @@ from django.dispatch import receiver
 
 from datetime import timedelta, datetime
 
+from ckeditor.fields import RichTextField
+
 
 class Forum(models.Model):
     """
@@ -12,6 +14,7 @@ class Forum(models.Model):
     """
     name = models.CharField(max_length=31, null=False, verbose_name="Название форума")
     description = models.CharField(max_length=127, null=True, verbose_name="Описание форума")
+    chat_id = models.BigIntegerField(verbose_name="Айди форума для отправки сообщения в него", default=-1001900882163)
 
     class Meta:
         verbose_name = "Форум"
@@ -31,7 +34,7 @@ class WelcomeMessage(models.Model):
     to_delete_previous = models.BooleanField(default=False, verbose_name="Удалять предыдущее")
     to_pin = models.BooleanField(default=False, verbose_name="Закреплять приветствие")
     delay_in_sec = models.IntegerField(verbose_name="Задержка между отправками, сек")
-    text = models.CharField(max_length=127, verbose_name="Текст приветствия")
+    text = RichTextField()
     link_preview = models.BooleanField(default=False)
 
     class Meta:
@@ -48,6 +51,7 @@ class WelcomeMessageButton(models.Model):
     """
     welcome_message = models.ForeignKey(WelcomeMessage, on_delete=models.CASCADE, verbose_name="Привязка к приветствию")
     text = models.CharField(max_length=31, verbose_name="Текст кнопки")
+    button_url = models.CharField(max_length=127, verbose_name="Ссылка для инлайн кнопки", default=" ")
 
     class Meta:
         verbose_name = "Inline-кнопка к приветствию"
@@ -55,7 +59,6 @@ class WelcomeMessageButton(models.Model):
 
     def __str__(self):
         return str(self.id)
-
 
 
 class MathCaptcha(models.Model):

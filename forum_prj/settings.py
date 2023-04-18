@@ -22,7 +22,9 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'forum_api'
+    'forum_api',
+
+    'ckeditor',
 ]
 
 JET_THEMES = [
@@ -61,7 +63,7 @@ JET_THEMES = [
 JET_DEFAULT_THEME = 'light-green'
 JET_SIDE_MENU_COMPACT = True
 JET_SIDE_MENU_ITEMS = [
-    {'app_label': 'forum_api', 'items': [
+    {'name': 'For', 'app_label': 'forum_api', 'items': [
         {'name': 'forum'},
         {'name': 'welcomemessage'},
         {'name': 'welcomemessagebutton'},
