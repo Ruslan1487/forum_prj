@@ -10,7 +10,7 @@ from welcome_api.views import (
     ButtonCaptchaViewSet, MathCaptchaSolverViewSet, QuizCaptchaSolverViewSet, ButtonCaptchaSolverViewSet,
     WelcomeMessageWasSentViewSet, add_captcha_page, add_math_captcha, add_quiz_captcha, add_button_captcha,
     CaptchaMessageWasSentViewSet, get_captcha_messages, UserRequestViewSet, add_inline_button, update_button_position,
-    get_welcome_buttons_by_forum)
+    get_welcome_buttons_by_forum, SilentModeViewSet, SilentModeWorksViewSet)
 
 
 router = routers.DefaultRouter()
@@ -30,6 +30,8 @@ router.register(r'button-captcha-solvers', ButtonCaptchaSolverViewSet, basename=
 router.register(r'welcome-messages-sent', WelcomeMessageWasSentViewSet, basename='welcome-messages-sent')
 router.register(r'captcha-messages-sent', CaptchaMessageWasSentViewSet, basename='captcha-messages-sent')
 router.register(r'users-requests', UserRequestViewSet, basename='users-requests')
+router.register(r'silent-modes', SilentModeViewSet, basename='silent-modes')
+router.register(r'silent-mode-works', SilentModeWorksViewSet, basename='silent-mode-works')
 
 
 urlpatterns = [

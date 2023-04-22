@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .models import (WelcomeMessage, WelcomeMessageButton, MathCaptcha, QuizCaptcha, ButtonCaptcha,
                      MathCaptchaSolver, QuizCaptchaSolver, ButtonCaptchaSolver, WelcomeMessageWasSent,
-                     CaptchaMessageWasSent, UserRequest)
+                     CaptchaMessageWasSent, UserRequest, SilentMode, SilentModeWorks)
 
 
 class WelcomeMessageSerializer(serializers.ModelSerializer):
@@ -101,4 +101,22 @@ class UserRequestSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = UserRequest
+        fields = '__all__'
+
+
+class SilentModeSerializer(serializers.ModelSerializer):
+    """
+        Сериалайзер для объектов режима тишины
+    """
+    class Meta:
+        model = SilentMode
+        fields = '__all__'
+
+
+class SilentModeWorksSerializer(serializers.ModelSerializer):
+    """
+        Сериалайзер для объектов текущего режима тишины
+    """
+    class Meta:
+        model = SilentModeWorks
         fields = '__all__'

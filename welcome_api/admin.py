@@ -4,7 +4,7 @@ from ckeditor.fields import RichTextField
 
 from .models import (WelcomeMessage, WelcomeMessageButton, MathCaptcha, QuizCaptcha, ButtonCaptcha,
                      MathCaptchaSolver, QuizCaptchaSolver, ButtonCaptchaSolver, WelcomeMessageWasSent,
-                     CaptchaMessageWasSent, UserRequest)
+                     CaptchaMessageWasSent, UserRequest, SilentMode, SilentModeWorks)
 
 
 admin.site.register(WelcomeMessageButton)
@@ -17,6 +17,7 @@ admin.site.register(ButtonCaptchaSolver)
 admin.site.register(WelcomeMessageWasSent)
 admin.site.register(CaptchaMessageWasSent)
 admin.site.register(UserRequest)
+admin.site.register(SilentModeWorks)
 
 
 class WelcomeMessageAdmin(admin.ModelAdmin):
@@ -26,3 +27,12 @@ class WelcomeMessageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(WelcomeMessage, WelcomeMessageAdmin)
+
+
+class SilentModeAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        RichTextField: {'widget': CKEditorWidget},
+    }
+
+
+admin.site.register(SilentMode, SilentModeAdmin)

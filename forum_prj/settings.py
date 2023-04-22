@@ -77,6 +77,7 @@ JET_SIDE_MENU_ITEMS = [
     ]},
 
     {'app_label': 'welcome_api', 'items': [
+        {'name': 'silentmode'},
         {'name': 'welcomemessage'},
         {'name': 'welcomemessagebutton'},
         {'name': 'mathcaptcha'},

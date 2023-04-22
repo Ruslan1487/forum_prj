@@ -8,12 +8,14 @@ from rest_framework.response import Response
 from .serializers import (
     WelcomeMessageSerializer, WelcomeMessageButtonSerializer, MathCaptchaSerializer,
     QuizCaptchaSerializer, ButtonCaptchaSerializer, MathCaptchaSolverSerializer, QuizCaptchaSolverSerializer,
-    ButtonCaptchaSolverSerializer, WelcomeMessageWasSentSerializer, CaptchaMessageWasSentSerializer, UserRequestSerializer
+    ButtonCaptchaSolverSerializer, WelcomeMessageWasSentSerializer, CaptchaMessageWasSentSerializer,
+    UserRequestSerializer, SilentModeSerializer, SilentModeWorksSerializer
 )
 
 from .models import (
     WelcomeMessage, WelcomeMessageButton, MathCaptcha, QuizCaptcha, ButtonCaptcha, MathCaptchaSolver,
-    QuizCaptchaSolver, ButtonCaptchaSolver, WelcomeMessageWasSent, CaptchaMessageWasSent, UserRequest)
+    QuizCaptchaSolver, ButtonCaptchaSolver, WelcomeMessageWasSent, CaptchaMessageWasSent, UserRequest, SilentMode,
+    SilentModeWorks)
 
 from .forms import MathCaptchaForm, QuizCaptchaForm, ButtonCaptchaForm
 
@@ -227,3 +229,23 @@ def update_button_position(request):
     r = requests.put(url, data)
     
     return Response()
+
+
+class SilentModeViewSet(viewsets.ModelViewSet):
+    """
+        Вьюсет для объектов режима тишины
+    """
+    serializer_class = SilentModeSerializer
+
+    def get_queryset(self):
+        return SilentMode.objects.all()
+
+
+class SilentModeWorksViewSet(viewsets.ModelViewSet):
+    """
+        Вьюсет для объектов текущего режима тишины
+    """
+    serializer_class = SilentModeWorksSerializer
+
+    def get_queryset(self):
+        return SilentModeWorks.objects.all()

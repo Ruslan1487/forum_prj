@@ -177,7 +177,7 @@ class WelcomeMessageWasSent(models.Model):
     """
         Модель для хранения отправленных приветственных сообщений
     """
-    forum_chat_id = models.IntegerField(default=1)
+    forum_chat_id = models.IntegerField()
     message_id = models.IntegerField()
 
     def __str__(self):
@@ -204,3 +204,49 @@ class UserRequest(models.Model):
 
     def __str__(self):
         return str(self.tg_user)
+
+
+class SilentMode(models.Model):
+    """
+        Модель для режима тишины
+    """
+    is_available = models.BooleanField(default=True, verbose_name="Режим активен")
+    allow_admin = models.BooleanField(default=True, verbose_name="Админам можно писать")
+
+    start_text = RichTextField(verbose_name="Сообщение в начале режима тишины")
+    end_text = RichTextField(verbose_name="Сообщение в конце режима тишины")
+
+    start_time = models.TimeField(verbose_name="Время начала режима тишины")
+    end_time = models.TimeField(null=True, blank=True, verbose_name="Время окончания режима тишины. Оставить пустым,"
+                                                                    "если указана продолжительность")
+
+    lasting_time_min = models.IntegerField(null=True, blank=True, verbose_name="Продолжительность режима тишины."
+                "Оставить пустым, если указано время окончания")
+
+    regularity = models.PositiveIntegerField(verbose_name="Повторять каждые ... дней.")
+    forum = models.ForeignKey(Forum, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return str(self.id)
+
+    class Meta:
+        verbose_name = "Режим тишины"
+        verbose_name_plural = "Режимы тишины"
+
+
+class SilentModeWorks(models.Model):
+    """
+        Модель запущенного режима тишины
+    """
+    silent_mode = models.ForeignKey(SilentMode, on_delete=models.CASCADE)
+    allow_admin = models.BooleanField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.id)
+
+
+@receiver(post_save, sender=SilentModeWorks)
+def set_allow_admin(sender, created, instance, **kwargs):
+    if created:
+        instance.allow_admin = instance.silent_mode.allow_admin
+        instance.save()
