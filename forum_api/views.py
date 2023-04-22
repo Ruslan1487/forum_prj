@@ -1,14 +1,8 @@
 from rest_framework import viewsets
 
-from .serializers import (
-    ForumSerializer, WelcomeMessageSerializer, WelcomeMessageButtonSerializer, MathCaptchaSerializer,
-    QuizCaptchaSerializer, ButtonCaptchaSerializer, MathCaptchaSolverSerializer, QuizCaptchaSolverSerializer,
-    ButtonCaptchaSolverSerializer
-)
+from .serializers import ForumSerializer, ForumEntryTrySerializer, ForumBlockedUserSerializer
 
-from .models import (
-    Forum, WelcomeMessage, WelcomeMessageButton, MathCaptcha, QuizCaptcha, ButtonCaptcha, MathCaptchaSolver,
-    QuizCaptchaSolver, ButtonCaptchaSolver)
+from .models import Forum, ForumEntryTry, ForumBlockedUser
 
 
 class ForumViewSet(viewsets.ModelViewSet):
@@ -21,81 +15,21 @@ class ForumViewSet(viewsets.ModelViewSet):
         return Forum.objects.all()
 
 
-class WelcomeMessageViewSet(viewsets.ModelViewSet):
+class ForumEntryTryViewSet(viewsets.ModelViewSet):
     """
-        Вьюсет для объектов приветствия
+        Вьюсет для объектов попыток зайти в форум
     """
-    serializer_class = WelcomeMessageSerializer
+    serializer_class = ForumEntryTrySerializer
 
     def get_queryset(self):
-        return WelcomeMessage.objects.all()
+        return ForumEntryTry.objects.all()
 
 
-class WelcomeMessageButtonViewSet(viewsets.ModelViewSet):
+class ForumBlockedUserViewSet(viewsets.ModelViewSet):
     """
-        Вьюсет для объектов инлайн кнопок к приветствию
+        Вьюсет для объектов пользователей в муте
     """
-    serializer_class = WelcomeMessageButtonSerializer
+    serializer_class = ForumBlockedUserSerializer
 
     def get_queryset(self):
-        return WelcomeMessageButton.objects.all()
-
-
-class MathCaptchaViewSet(viewsets.ModelViewSet):
-    """
-        Вьюсет для объектов математической капчи
-    """
-    serializer_class = MathCaptchaSerializer
-
-    def get_queryset(self):
-        return MathCaptcha.objects.all()
-
-
-class QuizCaptchaViewSet(viewsets.ModelViewSet):
-    """
-        Вьюсет для объектов капч-викторин
-    """
-    serializer_class = QuizCaptchaSerializer
-
-    def get_queryset(self):
-        return QuizCaptcha.objects.all()
-
-
-class ButtonCaptchaViewSet(viewsets.ModelViewSet):
-    """
-        Вьюсет для объектов кнопочных капч
-    """
-    serializer_class = ButtonCaptchaSerializer
-
-    def get_queryset(self):
-        return ButtonCaptcha.objects.all()
-
-
-class MathCaptchaSolverViewSet(viewsets.ModelViewSet):
-    """
-        Вьюсет для объектов решения математической капчи
-    """
-    serializer_class = MathCaptchaSolverSerializer
-
-    def get_queryset(self):
-        return MathCaptchaSolver.objects.all()
-
-
-class QuizCaptchaSolverViewSet(viewsets.ModelViewSet):
-    """
-        Вьюсет для объектов решения капчи-викторины
-    """
-    serializer_class = QuizCaptchaSolverSerializer
-
-    def get_queryset(self):
-        return QuizCaptchaSolver.objects.all()
-
-
-class ButtonCaptchaSolverViewSet(viewsets.ModelViewSet):
-    """
-        Вьюсет для объектов решения кнопочных капч
-    """
-    serializer_class = ButtonCaptchaSolverSerializer
-
-    def get_queryset(self):
-        return ButtonCaptchaSolver.objects.all()
+        return ForumBlockedUser.objects.all()

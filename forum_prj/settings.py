@@ -22,10 +22,18 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'forum_api',
+    'forum_api.apps.ForumApiConfig',
+    'welcome_api.apps.WelcomeApiConfig',
 
     'ckeditor',
+
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 JET_THEMES = [
     {
@@ -61,16 +69,20 @@ JET_THEMES = [
 ]
 
 JET_DEFAULT_THEME = 'light-green'
-JET_SIDE_MENU_COMPACT = True
+JET_SIDE_MENU_COMPACT = False
 JET_SIDE_MENU_ITEMS = [
-    {'name': 'For', 'app_label': 'forum_api', 'items': [
+
+    {'app_label': 'forum_api', 'items': [
         {'name': 'forum'},
+    ]},
+
+    {'app_label': 'welcome_api', 'items': [
         {'name': 'welcomemessage'},
         {'name': 'welcomemessagebutton'},
         {'name': 'mathcaptcha'},
         {'name': 'quizcaptcha'},
         {'name': 'buttoncaptcha'},
-    ]},
+    ]}
 ]
 
 

@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from .models import (Forum, WelcomeMessage, WelcomeMessageButton, MathCaptcha, QuizCaptcha, ButtonCaptcha,
-                     MathCaptchaSolver, QuizCaptchaSolver, ButtonCaptchaSolver)
+from .models import Forum, ForumEntryTry, ForumBlockedUser
 
 
 class ForumSerializer(serializers.ModelSerializer):
@@ -13,73 +12,19 @@ class ForumSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class WelcomeMessageSerializer(serializers.ModelSerializer):
+class ForumEntryTrySerializer(serializers.ModelSerializer):
     """
-        Сериалайзер для объектов приветствия
+        Сериалайзер для объектов попыток зайти в форум
     """
     class Meta:
-        model = WelcomeMessage
+        model = ForumEntryTry
         fields = '__all__'
 
 
-class WelcomeMessageButtonSerializer(serializers.ModelSerializer):
+class ForumBlockedUserSerializer(serializers.ModelSerializer):
     """
-        Сериалайзер для объектов инлайн кнопок к приветствию
-    """
-    class Meta:
-        model = WelcomeMessageButton
-        fields = '__all__'
-
-
-class MathCaptchaSerializer(serializers.ModelSerializer):
-    """
-        Сериалайзер для объектов математической капчи
+        Сериалайзер для объектов пользователей в муте
     """
     class Meta:
-        model = MathCaptcha
-        fields = '__all__'
-
-
-class QuizCaptchaSerializer(serializers.ModelSerializer):
-    """
-        Сериалайзер для объектов капч-викторин
-    """
-    class Meta:
-        model = QuizCaptcha
-        fields = '__all__'
-
-
-class ButtonCaptchaSerializer(serializers.ModelSerializer):
-    """
-        Сериалайзер для объектов кнопочных капч
-    """
-    class Meta:
-        model = ButtonCaptcha
-        fields = '__all__'
-
-
-class MathCaptchaSolverSerializer(serializers.ModelSerializer):
-    """
-        Сериалайзер для объектов решения математической капчи
-    """
-    class Meta:
-        model = MathCaptchaSolver
-        fields = '__all__'
-
-
-class QuizCaptchaSolverSerializer(serializers.ModelSerializer):
-    """
-        Сериалайзер для объектов решения капчи-викторины
-    """
-    class Meta:
-        model = QuizCaptchaSolver
-        fields = '__all__'
-
-
-class ButtonCaptchaSolverSerializer(serializers.ModelSerializer):
-    """
-        Сериалайзер для объектов решения кнопочных капч
-    """
-    class Meta:
-        model = ButtonCaptchaSolver
+        model = ForumBlockedUser
         fields = '__all__'
