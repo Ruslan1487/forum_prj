@@ -240,6 +240,8 @@ class SilentModeWorks(models.Model):
     """
     silent_mode = models.ForeignKey(SilentMode, on_delete=models.CASCADE)
     allow_admin = models.BooleanField(null=True, blank=True)
+    is_working = models.BooleanField(default=True)
+    date_start = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return str(self.id)
